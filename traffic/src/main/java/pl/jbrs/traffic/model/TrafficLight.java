@@ -9,6 +9,15 @@ public class TrafficLight {
         this.lane = lane;
     }
 
+    // Quality of Life function to make code a bit shorter
+    public int getWaitingCars() {
+        return lane.getWaitingCars();
+    }
+
+    public void changeColor() {
+        color = color.next();
+    }
+
     public Lane getLane() {
         return lane;
     }

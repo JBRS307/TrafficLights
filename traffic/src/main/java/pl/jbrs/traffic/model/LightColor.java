@@ -7,4 +7,13 @@ public enum LightColor {
     RED_YELLOW;
     // In Poland when green light is about to light up the red and yellow lights are turned on at the same time.
     // When green is about to change to res yellow light is turned on alone.
+
+    public LightColor next() {
+        return switch (this) {
+            case RED -> RED_YELLOW;
+            case RED_YELLOW -> GREEN;
+            case GREEN -> YELLOW;
+            case YELLOW -> RED;
+        };
+    }
 }
