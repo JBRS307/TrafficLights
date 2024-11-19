@@ -5,6 +5,7 @@ import pl.jbrs.traffic.model.*;
 import java.util.List;
 import java.util.Map;
 
+// Abstract class for road, contains common attributes and default implementations
 public abstract class AbstractRoad implements Road {
     // Direction tells us about which road this is
     protected final RoadDirection direction;
@@ -45,5 +46,10 @@ public abstract class AbstractRoad implements Road {
     @Override
     public PedestrianLight getPedestrianLight() {
         return null;
+    }
+
+    @Override
+    public int getPriority() {
+        return 1;
     }
 }

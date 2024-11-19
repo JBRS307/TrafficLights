@@ -11,4 +11,6 @@ public interface Road {
     // should be used only when there IS a crosswalk on the road,
     // otherwise there is a risk of NullPointerException
     PedestrianLight getPedestrianLight();
+
+    int getPriority();
 }
