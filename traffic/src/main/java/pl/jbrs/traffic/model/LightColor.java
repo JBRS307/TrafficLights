@@ -16,4 +16,12 @@ public enum LightColor {
             case YELLOW -> RED;
         };
     }
+
+    public LightColor nextPedestrian() {
+        return switch (this) {
+            case RED -> GREEN;
+            case GREEN -> RED;
+            default -> throw new IllegalStateException("Unexpected value for pedestrian light: " + this);
+        };
+    }
 }
