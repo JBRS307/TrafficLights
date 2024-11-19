@@ -37,5 +37,13 @@ public abstract class AbstractRoad implements Road {
         getLane(possibleLanes).addVehicle(v);
     }
 
+    @Override
+    public boolean hasCrosswalk() {
+        return false;
+    }
 
+    @Override
+    public PedestrianLight getPedestrianLight() {
+        return null;
+    }
 }
