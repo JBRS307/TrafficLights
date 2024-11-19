@@ -1,9 +1,6 @@
 package pl.jbrs.traffic.model;
 
-public class Vehicle {
-    private final String id;
+import pl.jbrs.traffic.model.road.RoadDirection;
 
-    public Vehicle(String id) {
-        this.id = id;
-    }
+public record Vehicle(String id, RoadDirection startRoad, RoadDirection endRoad) {
 }
