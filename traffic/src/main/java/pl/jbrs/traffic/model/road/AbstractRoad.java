@@ -52,4 +52,9 @@ public abstract class AbstractRoad implements Road {
     public int getPriority() {
         return 1;
     }
+
+    @Override
+    public Map<LaneDirection, List<TrafficLight>> getLights() {
+        return trafficLights;
+    }
 }

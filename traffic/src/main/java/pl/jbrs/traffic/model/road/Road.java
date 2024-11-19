@@ -1,7 +1,12 @@
 package pl.jbrs.traffic.model.road;
 
+import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.PedestrianLight;
+import pl.jbrs.traffic.model.TrafficLight;
 import pl.jbrs.traffic.model.Vehicle;
+
+import java.util.List;
+import java.util.Map;
 
 public interface Road {
     void addVehicle(Vehicle v);
@@ -13,4 +18,6 @@ public interface Road {
     PedestrianLight getPedestrianLight();
 
     int getPriority();
+
+    Map<LaneDirection, List<TrafficLight>> getLights();
 }
