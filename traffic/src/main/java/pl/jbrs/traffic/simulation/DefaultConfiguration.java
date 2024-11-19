@@ -7,4 +7,7 @@ public class DefaultConfiguration {
 
     // Determines how many cars is worth 1 priority point
     public static final int PRIORITY_MULTIPLIER = 10;
+
+    // This should rather stay default
+    public static final int YELLOW_TIME = 3;
 }
