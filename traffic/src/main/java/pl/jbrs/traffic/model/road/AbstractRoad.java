@@ -17,7 +17,7 @@ public abstract class AbstractRoad implements Road {
         this.trafficLights = trafficLights;
     }
 
-    protected Lane getLane(List<LaneDirection> possibleLanes) {
+    protected Lane getBestLane(List<LaneDirection> possibleLanes) {
         Lane bestLane = null;
         int minWaitingCars = Integer.MAX_VALUE;
         for (LaneDirection laneDirection : possibleLanes) {
@@ -35,7 +35,7 @@ public abstract class AbstractRoad implements Road {
     @Override
     public void addVehicle(Vehicle v) {
         List<LaneDirection> possibleLanes = LaneDirection.fromMoveDirection(MoveDirection.calcDirection(v.startRoad(), v.endRoad()));
-        getLane(possibleLanes).addVehicle(v);
+        getBestLane(possibleLanes).addVehicle(v);
     }
 
     @Override
