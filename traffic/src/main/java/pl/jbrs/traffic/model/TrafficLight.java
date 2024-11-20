@@ -14,8 +14,8 @@ public class TrafficLight {
         return lane.getWaitingCars();
     }
 
-    public void changeColor() {
-        color = color.next();
+    public void setColor(LightColor color) {
+        this.color = color;
     }
 
     public LightColor getColor() {

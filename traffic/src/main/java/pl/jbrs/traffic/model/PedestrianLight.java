@@ -12,11 +12,14 @@ public class PedestrianLight {
         return buttonPressed;
     }
 
-    public void changeColor() {
-        color = color.nextPedestrian();
-        if (color == LightColor.GREEN) {
-            buttonPressed = false;
-            // Light changed so button must be canceled
+    public void setColor(LightColor color) {
+        if (color != LightColor.RED && color != LightColor.GREEN) {
+            throw new IllegalArgumentException("Color should be red or green for pedestrian light");
         }
+        this.color = color;
+    }
+
+    public LightColor getColor() {
+        return color;
     }
 }
