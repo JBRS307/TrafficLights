@@ -19,5 +19,7 @@ public interface Road {
 
     int getPriority();
 
+    RoadDirection getDirection();
+
     Map<LaneDirection, List<TrafficLight>> getLights();
 }
