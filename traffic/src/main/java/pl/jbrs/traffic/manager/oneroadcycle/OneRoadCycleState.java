@@ -37,7 +37,7 @@ public enum OneRoadCycleState {
             case EAST -> NORTH_YELLOW;
             case NORTH_YELLOW -> NORTH;
             case NORTH -> WEST_YELLOW;
-        }
+        };
     }
 
     public RoadDirection toRoadDirection() {

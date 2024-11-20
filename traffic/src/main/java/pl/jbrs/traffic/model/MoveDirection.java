@@ -12,8 +12,8 @@ public enum MoveDirection {
         return switch (end.toInt() - start.toInt()) {
             case 0 -> UTURN;
             case 2, -2 -> STRAIGHT;
-            case 1, -3 -> RIGHT;
-            case -1, 3 -> LEFT;
+            case -1, 3 -> RIGHT;
+            case 1, -3 -> LEFT;
             default -> throw new IllegalStateException("Unexpected value: " + (end.toInt() - start.toInt()));
         };
 
