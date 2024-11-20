@@ -1,9 +1,8 @@
 package pl.jbrs.traffic.simulation.command;
 
-import pl.jbrs.traffic.manager.TrafficManager;
-import pl.jbrs.traffic.model.MoveDirection;
 import pl.jbrs.traffic.model.Vehicle;
 import pl.jbrs.traffic.model.road.RoadDirection;
+import pl.jbrs.traffic.simulation.Simulation;
 
 public class AddCarCommand implements Command {
     private RoadDirection startDirection;
@@ -17,7 +16,7 @@ public class AddCarCommand implements Command {
     }
 
     @Override
-    public void execute(TrafficManager trafficManager) {
-        trafficManager.addVehicle(new Vehicle(vehicleId, startDirection, endDirection));
+    public void execute(Simulation simulation) {
+        simulation.addVehicle(new Vehicle(vehicleId, startDirection, endDirection));
     }
 }

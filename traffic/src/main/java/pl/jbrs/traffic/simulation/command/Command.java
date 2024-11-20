@@ -1,8 +1,8 @@
 package pl.jbrs.traffic.simulation.command;
 
-import pl.jbrs.traffic.manager.TrafficManager;
+import pl.jbrs.traffic.simulation.Simulation;
 
 @FunctionalInterface
 public interface Command {
-    void execute(TrafficManager trafficManager);
+    void execute(Simulation simulation);
 }
