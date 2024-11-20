@@ -7,12 +7,12 @@ import pl.jbrs.traffic.strategy.Strategy;
 
 import java.util.Map;
 
-public class TrafficManager {
-    private final Map<RoadDirection, Road> roadMap;
+public abstract class AbstractTrafficManager {
+    protected final Map<RoadDirection, Road> roadMap;
 
-    private final Strategy strategy;
+    protected final Strategy strategy;
 
-    public TrafficManager(Map<RoadDirection, Road> roadMap, Strategy strategy) {
+    public AbstractTrafficManager(Map<RoadDirection, Road> roadMap, Strategy strategy) {
         this.roadMap = roadMap;
         this.strategy = strategy;
     }
