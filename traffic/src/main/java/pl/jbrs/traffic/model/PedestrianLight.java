@@ -4,7 +4,7 @@ public class PedestrianLight {
     private boolean buttonPressed = false;
     private LightColor color = LightColor.RED;
 
-    public void pressButton() {
+    public void setButtonPressed(boolean buttonPressed) {
         buttonPressed = true;
     }
 
