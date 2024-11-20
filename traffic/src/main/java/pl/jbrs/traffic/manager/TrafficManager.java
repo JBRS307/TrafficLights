@@ -1,7 +1,5 @@
 package pl.jbrs.traffic.manager;
 
-import pl.jbrs.traffic.model.Vehicle;
-
 // Each manager is realizes separate strategy.
 // Parts of the strategy are
 //     - Manager - main interface

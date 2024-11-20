@@ -2,6 +2,7 @@ package pl.jbrs.traffic.manager.oneroadcycle;
 
 import pl.jbrs.traffic.manager.AbstractTrafficManager;
 import pl.jbrs.traffic.model.LightColor;
+import pl.jbrs.traffic.model.PedestrianLight;
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.configuration.ModelConfiguration;
@@ -47,8 +48,13 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
 
     private void toGreen(OneRoadCycleState state) {
         RoadDirection currDirection = state.toRoadDirection();
+        // Conditions must be in this order to avoid getting NullPointerException
         if (roadMap.get(currDirection.prev()).hasCrosswalk()) {
-            roadMap.get(currDirection.prev()).getPedestrianLight().setColor(LightColor.GREEN);
+            PedestrianLight pedestrianLight = roadMap.get(currDirection.prev()).getPedestrianLight();
+            if (pedestrianLight.isButtonPressed()) {
+                pedestrianLight.setColor(LightColor.GREEN);
+                pedestrianLight.setButtonPressed(false);
+            }
         }
 
         roadMap.get(currDirection)
