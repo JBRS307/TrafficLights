@@ -63,4 +63,9 @@ public class BasicRoad implements Road {
     public Map<LaneDirection, List<TrafficLight>> getLights() {
         return trafficLights;
     }
+
+    @Override
+    public boolean isPedestrianCrossing() {
+        return false;
+    }
 }
