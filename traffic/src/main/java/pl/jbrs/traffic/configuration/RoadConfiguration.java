@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.simulation.configuration;
+package pl.jbrs.traffic.configuration;
 
 import pl.jbrs.traffic.exception.InvalidRoadConfigurationException;
 import pl.jbrs.traffic.model.LaneDirection;

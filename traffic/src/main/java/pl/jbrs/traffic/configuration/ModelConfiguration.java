@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.simulation.configuration;
+package pl.jbrs.traffic.configuration;
 
 public class ModelConfiguration {
     private int stateLength;

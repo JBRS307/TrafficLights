@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.simulation.configuration;
+package pl.jbrs.traffic.configuration;
 
 public enum TrafficStrategy {
     ONE_ROAD_CYCLE;

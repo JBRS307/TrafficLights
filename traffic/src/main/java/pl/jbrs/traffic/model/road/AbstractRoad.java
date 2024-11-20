@@ -1,7 +1,6 @@
 package pl.jbrs.traffic.model.road;
 
 import pl.jbrs.traffic.model.*;
-import pl.jbrs.traffic.simulation.configuration.DefaultRoadConfiguration;
 
 import java.util.List;
 import java.util.Map;

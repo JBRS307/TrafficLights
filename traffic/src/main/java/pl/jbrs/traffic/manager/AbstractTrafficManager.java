@@ -2,7 +2,7 @@ package pl.jbrs.traffic.manager;
 
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
-import pl.jbrs.traffic.simulation.configuration.ModelConfiguration;
+import pl.jbrs.traffic.configuration.ModelConfiguration;
 
 import java.util.Map;
 
