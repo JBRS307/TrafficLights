@@ -40,7 +40,7 @@ public enum OneRoadCycleState {
         }
     }
 
-    public RoadDirection stateToDirection() {
+    public RoadDirection toRoadDirection() {
         return switch (this) {
             case NORTH, NORTH_YELLOW -> RoadDirection.NORTH;
             case SOUTH, SOUTH_YELLOW -> RoadDirection.SOUTH;
