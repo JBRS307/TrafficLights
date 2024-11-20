@@ -47,9 +47,16 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
 
     private void toGreen(OneRoadCycleState state) {
         RoadDirection currDirection = state.toRoadDirection();
-        if (roadMap.get(currDirection).hasCrosswalk()) {
-            roadMap.get(currDirection).getPedestrianLight().setColor(LightColor.GREEN);
+        if (roadMap.get(currDirection.prev()).hasCrosswalk()) {
+            roadMap.get(currDirection.prev()).getPedestrianLight().setColor(LightColor.GREEN);
         }
+
+        roadMap.get(currDirection)
+                .getLights()
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .forEach(light -> light.setColor(LightColor.GREEN));
     }
 
     @Override
