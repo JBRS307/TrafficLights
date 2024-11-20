@@ -18,6 +18,10 @@ public class TrafficLight {
         color = color.next();
     }
 
+    public LightColor getColor() {
+        return color;
+    }
+
     public Lane getLane() {
         return lane;
     }
