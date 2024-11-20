@@ -5,11 +5,14 @@ public class Configuration {
     private int priorityMultiplier;
     private int yellowTime;
 
+    private int minStateLength;
+
     // Empty constructor containing default values
     public Configuration() {
         this.stateLength = DefaultConfiguration.STATE_LENGTH;
         this.priorityMultiplier = DefaultConfiguration.PRIORITY_MULTIPLIER;
         this.yellowTime = DefaultConfiguration.YELLOW_TIME;
+        this.minStateLength = DefaultConfiguration.MIN_STATE_LENGTH;
     }
 
     public int getStateLength() {
@@ -43,6 +46,17 @@ public class Configuration {
             throw new IllegalArgumentException("yellowTime must be greater than 0");
         }
         this.yellowTime = yellowTime;
+    }
+
+    public int getMinStateLength() {
+        return minStateLength;
+    }
+
+    public void setMinStateLength(int minStateLength) {
+        if (minStateLength < 1) {
+            throw new IllegalArgumentException("minStateLength must be greater than 0");
+        }
+        this.minStateLength = minStateLength;
     }
 
 }

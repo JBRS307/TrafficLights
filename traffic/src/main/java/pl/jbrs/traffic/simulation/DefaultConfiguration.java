@@ -10,4 +10,6 @@ public class DefaultConfiguration {
 
     // This should rather stay default
     public static final int YELLOW_TIME = 3;
+
+    public static final int MIN_STATE_LENGTH = 5;
 }
