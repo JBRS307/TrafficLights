@@ -15,29 +15,12 @@ public enum OneRoadCycleState {
     WEST_YELLOW;
 
     public OneRoadCycleState next() {
-        return switch (this) {
-            case NORTH -> NORTH_YELLOW;
-            case NORTH_YELLOW -> EAST;
-            case EAST -> EAST_YELLOW;
-            case EAST_YELLOW -> SOUTH;
-            case SOUTH -> SOUTH_YELLOW;
-            case SOUTH_YELLOW -> WEST;
-            case WEST -> WEST_YELLOW;
-            case WEST_YELLOW -> NORTH;
-        };
+        return OneRoadCycleState.fromInt((this.toInt() + 1) % 8);
     }
 
     public OneRoadCycleState prev() {
-        return switch (this) {
-            case WEST_YELLOW -> WEST;
-            case WEST -> SOUTH_YELLOW;
-            case SOUTH_YELLOW -> SOUTH;
-            case SOUTH -> EAST_YELLOW;
-            case EAST_YELLOW -> EAST;
-            case EAST -> NORTH_YELLOW;
-            case NORTH_YELLOW -> NORTH;
-            case NORTH -> WEST_YELLOW;
-        };
+        int res = this.toInt() - 1;
+        return res > 0 ? OneRoadCycleState.fromInt(res) : OneRoadCycleState.WEST_YELLOW;
     }
 
     public RoadDirection toRoadDirection() {
@@ -46,6 +29,33 @@ public enum OneRoadCycleState {
             case SOUTH, SOUTH_YELLOW -> RoadDirection.SOUTH;
             case EAST, EAST_YELLOW -> RoadDirection.EAST;
             case WEST, WEST_YELLOW -> RoadDirection.WEST;
+        };
+    }
+
+    public int toInt() {
+        return switch (this) {
+            case NORTH -> 0;
+            case NORTH_YELLOW -> 1;
+            case EAST -> 2;
+            case EAST_YELLOW -> 3;
+            case SOUTH -> 4;
+            case SOUTH_YELLOW -> 5;
+            case WEST -> 6;
+            case WEST_YELLOW -> 7;
+        };
+    }
+
+    public static OneRoadCycleState fromInt(int value) {
+        return switch (value) {
+            case 0 -> NORTH;
+            case 1 -> NORTH_YELLOW;
+            case 2 -> EAST;
+            case 3 -> EAST_YELLOW;
+            case 4 -> SOUTH;
+            case 5 -> SOUTH_YELLOW;
+            case 6 -> WEST;
+            case 7 -> WEST_YELLOW;
+            default -> throw new IllegalArgumentException("OneRoadCycleState value must be between 0 and 7");
         };
     }
 
