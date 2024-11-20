@@ -10,5 +10,6 @@ import pl.jbrs.traffic.model.Vehicle;
 //     - State - a step in a traffic lights cycle
 
 public interface TrafficManager {
-    void nextState();
+    // Changes state end returns time of the new state
+    int nextState();
 }

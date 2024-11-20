@@ -23,7 +23,7 @@ public class OneRoadCycleTimeCalculator {
         int stateCars = 0;
         int restCars = 0;
 
-        RoadDirection currentDirection = currentState.next().stateToDirection();
+        RoadDirection currentDirection = currentState.next().toRoadDirection();
 
         for (RoadDirection roadDirection : roadMap.keySet()) {
             int sumOfCars = roadMap.get(roadDirection)

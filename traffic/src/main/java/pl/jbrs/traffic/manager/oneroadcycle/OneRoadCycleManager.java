@@ -16,9 +16,28 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
         this.timeCalculator = new OneRoadCycleTimeCalculator(config);
     }
 
-    @Override
-    public void nextState() {
-        int stateTime = timeCalculator.calcNextStepLength(roadMap, currentState);
+    private void toYellow(OneRoadCycleState state) {
 
+    }
+
+    private void toRed(OneRoadCycleState state) {
+
+    }
+
+    private void toGreen(OneRoadCycleState state) {
+
+    }
+
+    @Override
+    public int nextState() {
+        int stateTime = timeCalculator.calcNextStepLength(roadMap, currentState);
+        if (currentState.isYellow()) {
+            toRed(currentState);
+            toGreen(currentState.next());
+        } else {
+            toYellow(currentState);
+        }
+        currentState = currentState.next();
+        return stateTime;
     }
 }
