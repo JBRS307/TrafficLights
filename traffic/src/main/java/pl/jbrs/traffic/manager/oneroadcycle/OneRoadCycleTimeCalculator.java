@@ -3,15 +3,15 @@ package pl.jbrs.traffic.manager.oneroadcycle;
 import pl.jbrs.traffic.model.TrafficLight;
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
-import pl.jbrs.traffic.simulation.Configuration;
+import pl.jbrs.traffic.simulation.configuration.ModelConfiguration;
 
 import java.util.List;
 import java.util.Map;
 
 public class OneRoadCycleTimeCalculator {
-    private final Configuration config;
+    private final ModelConfiguration config;
 
-    public OneRoadCycleTimeCalculator(Configuration config) {
+    public OneRoadCycleTimeCalculator(ModelConfiguration config) {
         this.config = config;
     }
 

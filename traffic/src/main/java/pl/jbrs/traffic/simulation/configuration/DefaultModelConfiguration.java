@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.simulation;
+package pl.jbrs.traffic.simulation.configuration;
 
 public class DefaultConfiguration {
     // Base value of determining how many simulation steps should strategy state take

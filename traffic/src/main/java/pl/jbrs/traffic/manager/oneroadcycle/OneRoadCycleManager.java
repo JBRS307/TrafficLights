@@ -4,7 +4,7 @@ import pl.jbrs.traffic.manager.AbstractTrafficManager;
 import pl.jbrs.traffic.model.LightColor;
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
-import pl.jbrs.traffic.simulation.Configuration;
+import pl.jbrs.traffic.simulation.configuration.ModelConfiguration;
 
 import java.util.Collection;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
     private OneRoadCycleState currentState = OneRoadCycleState.NORTH;
     private final OneRoadCycleTimeCalculator timeCalculator;
 
-    public OneRoadCycleManager(Map<RoadDirection, Road> roadMap, Configuration config) {
+    public OneRoadCycleManager(Map<RoadDirection, Road> roadMap, ModelConfiguration config) {
         super(roadMap, config);
         this.timeCalculator = new OneRoadCycleTimeCalculator(config);
     }
