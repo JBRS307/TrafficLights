@@ -7,15 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 // Abstract class for road, contains common attributes and default implementations
-public class BasicRoad implements Road {
+public abstract class AbstractRoad implements Road {
     // Direction tells us about which road this is
     protected final RoadDirection direction;
 
     protected final Map<LaneDirection, List<TrafficLight>> trafficLights;
 
-    public BasicRoad(RoadDirection direction, Map<LaneDirection, List<TrafficLight>> trafficLights) {
+    protected final int priority;
+
+    public AbstractRoad(RoadDirection direction, Map<LaneDirection, List<TrafficLight>> trafficLights, int priority) {
         this.direction = direction;
         this.trafficLights = trafficLights;
+        this.priority = priority;
     }
 
     protected Lane getBestLane(List<LaneDirection> possibleLanes) {
@@ -51,7 +54,7 @@ public class BasicRoad implements Road {
 
     @Override
     public int getPriority() {
-        return DefaultRoadConfiguration.PRIORITY;
+        return priority;
     }
 
     @Override
@@ -68,4 +71,10 @@ public class BasicRoad implements Road {
     public boolean isPedestrianCrossing() {
         return false;
     }
+
+    @Override
+    public void movePedestrians() {}
+
+    @Override
+    public void addPedestrian() {}
 }

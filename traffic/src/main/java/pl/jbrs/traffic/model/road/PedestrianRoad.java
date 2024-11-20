@@ -8,9 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public class PedestrianRoad extends BasicRoad {
+    private int pedestriansWaiting = 0;
+    private int pedestriansOnRoad = 0;
+
     private final PedestrianLight pedestrianLight;
-    public PedestrianRoad(RoadDirection direction, Map<LaneDirection, List<TrafficLight>> trafficLights, PedestrianLight pedestrianLight) {
-        super(direction, trafficLights);
+    public PedestrianRoad(RoadDirection direction, Map<LaneDirection, List<TrafficLight>> trafficLights, PedestrianLight pedestrianLight, int priority) {
+        super(direction, trafficLights, priority);
         this.pedestrianLight = pedestrianLight;
     }
 
@@ -22,5 +25,26 @@ public class PedestrianRoad extends BasicRoad {
     @Override
     public boolean hasCrosswalk() {
         return true;
+    }
+
+    @Override
+    public boolean isPedestrianCrossing() {
+        return pedestriansOnRoad > 0;
+    }
+
+    // Pedestrians should take 2 steps to cross the road
+    // it is possible with this approach
+    // Pedestrians on road in current steps are pedestrians waiting in the previous step
+    // pedestriansWaiting then goes to 0
+    @Override
+    public void movePedestrians() {
+        pedestriansOnRoad = pedestriansWaiting;
+        pedestriansWaiting = 0;
+    }
+
+    @Override
+    public void addPedestrian() {
+        pedestriansWaiting++;
+        pedestrianLight.setButtonPressed(true);
     }
 }

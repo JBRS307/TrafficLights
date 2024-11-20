@@ -11,11 +11,17 @@ import java.util.Map;
 public interface Road {
     void addVehicle(Vehicle v);
 
+    void addPedestrian();
+
     boolean hasCrosswalk();
 
     // should be used only when there IS a crosswalk on the road,
     // otherwise there is a risk of NullPointerException
     PedestrianLight getPedestrianLight();
+
+    boolean isPedestrianCrossing();
+
+    void movePedestrians();
 
     int getPriority();
 
