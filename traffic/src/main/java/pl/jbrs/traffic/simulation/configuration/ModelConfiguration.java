@@ -1,14 +1,6 @@
 package pl.jbrs.traffic.simulation.configuration;
 
-import pl.jbrs.traffic.model.road.Road;
-
-public class Configuration {
-    private final RoadConfiguration northRoadConfiguration = new RoadConfiguration();
-    private final RoadConfiguration eastRoadConfiguration = new RoadConfiguration();
-    private final RoadConfiguration southRoadConfiguration = new RoadConfiguration();
-    private final RoadConfiguration westRoadConfiguration = new RoadConfiguration();
-
-
+public class ModelConfiguration {
     private int stateLength;
     private int priorityMultiplier;
     private int yellowTime;
@@ -16,15 +8,11 @@ public class Configuration {
     private int minStateLength;
 
     // Empty constructor containing default values
-    public Configuration() {
-        this.stateLength = DefaultConfiguration.STATE_LENGTH;
-        this.priorityMultiplier = DefaultConfiguration.PRIORITY_MULTIPLIER;
-        this.yellowTime = DefaultConfiguration.YELLOW_TIME;
-        this.minStateLength = DefaultConfiguration.MIN_STATE_LENGTH;
-    }
-
-    public RoadConfiguration getRoadConfiguration() {
-        return roadConfiguration;
+    public ModelConfiguration() {
+        this.stateLength = DefaultModelConfiguration.STATE_LENGTH;
+        this.priorityMultiplier = DefaultModelConfiguration.PRIORITY_MULTIPLIER;
+        this.yellowTime = DefaultModelConfiguration.YELLOW_TIME;
+        this.minStateLength = DefaultModelConfiguration.MIN_STATE_LENGTH;
     }
 
     public int getStateLength() {

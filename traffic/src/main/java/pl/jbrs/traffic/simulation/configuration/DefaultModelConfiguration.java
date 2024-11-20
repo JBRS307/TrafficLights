@@ -1,6 +1,6 @@
 package pl.jbrs.traffic.simulation.configuration;
 
-public class DefaultConfiguration {
+public class DefaultModelConfiguration {
     // Base value of determining how many simulation steps should strategy state take
     // It is adjusted by strategy
     public static final int STATE_LENGTH = 30;
