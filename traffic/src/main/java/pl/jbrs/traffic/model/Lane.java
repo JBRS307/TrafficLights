@@ -19,8 +19,12 @@ public class Lane {
         vehicles.add(v);
     }
 
-    public void moveCar() {
+    public void moveVehicle() {
         vehicles.poll();
+    }
+
+    public Vehicle checkFirstVehicle() {
+        return vehicles.peek();
     }
 
     public int getWaitingCars() {
