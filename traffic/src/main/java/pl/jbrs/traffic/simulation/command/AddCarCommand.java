@@ -5,9 +5,9 @@ import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.Simulation;
 
 public class AddCarCommand implements Command {
-    private RoadDirection startDirection;
-    private RoadDirection endDirection;
-    private String vehicleId;
+    private final RoadDirection startDirection;
+    private final RoadDirection endDirection;
+    private final String vehicleId;
 
     public AddCarCommand(RoadDirection startDirection, RoadDirection endDirection, String vehicleId) {
         this.startDirection = startDirection;
