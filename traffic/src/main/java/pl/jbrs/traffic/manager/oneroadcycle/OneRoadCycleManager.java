@@ -1,10 +1,12 @@
 package pl.jbrs.traffic.manager.oneroadcycle;
 
 import pl.jbrs.traffic.manager.AbstractTrafficManager;
+import pl.jbrs.traffic.model.LightColor;
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.Configuration;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class OneRoadCycleManager extends AbstractTrafficManager {
@@ -16,16 +18,38 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
         this.timeCalculator = new OneRoadCycleTimeCalculator(config);
     }
 
+    // Change colors of current road to Yellow
+    // If there is pedestrian light on the road to the right
+    // switch it to red
     private void toYellow(OneRoadCycleState state) {
+        RoadDirection currDirection = state.toRoadDirection();
 
+        if (roadMap.get(currDirection.prev()).hasCrosswalk()) {
+            roadMap.get(currDirection.prev()).getPedestrianLight().setColor(LightColor.RED);
+        }
+
+        roadMap.get(currDirection)
+                .getLights()
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .forEach(light -> light.setColor(LightColor.YELLOW));
     }
 
     private void toRed(OneRoadCycleState state) {
-
+        roadMap.get(state.toRoadDirection())
+                .getLights()
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .forEach(light -> light.setColor(LightColor.RED));
     }
 
     private void toGreen(OneRoadCycleState state) {
-
+        RoadDirection currDirection = state.toRoadDirection();
+        if (roadMap.get(currDirection).hasCrosswalk()) {
+            roadMap.get(currDirection).getPedestrianLight().setColor(LightColor.GREEN);
+        }
     }
 
     @Override
