@@ -10,30 +10,55 @@ public class MoveDirectionTest {
     @Test
     void calcDirectionTest() {
         RoadDirection start, end;
+        MoveDirection result;
 
+        // given
         start = RoadDirection.NORTH;
         end = RoadDirection.SOUTH;
-        assertEquals(MoveDirection.STRAIGHT, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.STRAIGHT, result);
 
+        // given
         start = RoadDirection.EAST;
         end = RoadDirection.NORTH;
-        assertEquals(MoveDirection.RIGHT, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.RIGHT, result);
 
+        // given
         start = RoadDirection.NORTH;
         end = RoadDirection.WEST;
-        assertEquals(MoveDirection.RIGHT, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.RIGHT, result);
 
+        // given
         start = RoadDirection.WEST;
         end = RoadDirection.WEST;
-        assertEquals(MoveDirection.UTURN, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.UTURN, result);
 
+        // given
         start = RoadDirection.WEST;
         end = RoadDirection.NORTH;
-        assertEquals(MoveDirection.LEFT, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.LEFT, result);
 
+        // given
         start = RoadDirection.SOUTH;
         end = RoadDirection.WEST;
-        assertEquals(MoveDirection.LEFT, MoveDirection.calcDirection(start, end));
+        // when
+        result = MoveDirection.calcDirection(start, end);
+        // then
+        assertEquals(MoveDirection.LEFT, result);
     }
 
 }
