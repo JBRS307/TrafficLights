@@ -1,12 +1,11 @@
 package pl.jbrs.traffic.jsonparser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.jbrs.traffic.jsonparser.options.LaneOption;
 import pl.jbrs.traffic.jsonparser.options.ModelOption;
 import pl.jbrs.traffic.jsonparser.options.RoadOption;
 import pl.jbrs.traffic.jsonparser.options.SimulationOption;
+import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.road.RoadDirection;
 
 import java.util.List;
@@ -68,8 +67,8 @@ public class BasicJSONParser implements JSONParser {
         JSONObject westLanes = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.WEST.toString()));
         JSONObject southLanes = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.SOUTH.toString()));
 
-        List<String> laneKeys = Stream.of(LaneOption.values())
-                .map(LaneOption::toString)
+        List<String> laneKeys = Stream.of(LaneDirection.values())
+                .map(LaneDirection::toString)
                 .toList();
 
         northLanes = extractKeys(laneKeys, northLanes);

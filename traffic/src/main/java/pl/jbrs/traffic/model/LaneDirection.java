@@ -24,6 +24,19 @@ public enum LaneDirection {
         };
     }
 
+    @Override
+    public String toString() {
+        return switch (this) {
+            case UTURN -> "uturn";
+            case UTURN_LEFT -> "uturnLeft";
+            case LEFT -> "left";
+            case STRAIGHT_LEFT -> "straightLeft";
+            case STRAIGHT -> "straight";
+            case STRAIGHT_RIGHT -> "straightRight";
+            case RIGHT -> "right";
+        };
+    }
+
     // Function gets possible lane direction for given move direction
     // That is for MoveDirection STRAIGHT it will return List.of(STRAIGHT_RIGHT, STRAIGHT, STRAIGHT_LEFT)
     // List will be ordered from rightmost to leftmost direction
