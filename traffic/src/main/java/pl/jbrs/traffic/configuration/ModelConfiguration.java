@@ -27,16 +27,31 @@ public class ModelConfiguration {
         // the config entry is ignored
         try {
             modelConfiguration.setStateLength(json.getInt(ModelOption.StateLength.toString()));
-        } catch (JSONException ignored) {}
+        } catch (JSONException ignored) {
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+
         try {
             modelConfiguration.setPriorityMultiplier(json.getInt(ModelOption.PriorityMultiplier.toString()));
-        } catch (JSONException ignored) {}
+        } catch (JSONException ignored) {
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+
         try {
             modelConfiguration.setYellowTime(json.getInt(ModelOption.YellowTime.toString()));
-        } catch (JSONException ignored) {}
+        } catch (JSONException ignored) {
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+
         try {
             modelConfiguration.setMinStateLength(json.getInt(ModelOption.MinStateLength.toString()));
-        } catch (JSONException ignored) {}
+        } catch (JSONException ignored) {
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
 
         return modelConfiguration;
     }
