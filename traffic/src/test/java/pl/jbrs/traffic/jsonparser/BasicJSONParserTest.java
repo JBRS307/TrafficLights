@@ -20,12 +20,17 @@ public class BasicJSONParserTest {
                     "\"stateLength\":12," +
                     "\"yellowTime\":3," +
                     "\"trafficStrategy\":\"oneRoadCycle\"," +
-                    "\"crosswalk\":true," +
-                    "\"lanes\":{" +
+                    "\"roads\":{" +
                         "\"north\":{" +
-                            "\"straightLeft\":2," +
-                            "\"uturn\":1," +
-                            "\"fsdfsdf\":1212" + // some random key to check if it gets kicked out
+                            "\"crosswalk\":true," +
+                            "\"lanes\":{" +
+                                "\"straightLeft\":2," +
+                                "\"uturn\":1," +
+                                "\"fsdfsdf\":1212" + // some random key to check if it gets kicked out
+                            "}" +
+                        "}," +
+                        "\"east\":{" +
+                            "\"crosswalk\":true" +
                         "}" +
                     "}" +
                 "}";
@@ -59,17 +64,20 @@ public class BasicJSONParserTest {
     }
 
     private JSONObject buildExpectedForRoadConfigurationTest() {
-        JSONObject northernLane = new JSONObject();
-        northernLane.put("uturn", 1);
-        northernLane.put("straightLeft", 2);
-
-        JSONObject lanes = new JSONObject();
-        lanes.put("north", northernLane);
-
-        JSONObject result = new JSONObject();
-        result.put("crosswalk", true);
-        result.put("lanes", lanes);
-        return result;
+        String jsonString =
+                "{" +
+                    "\"north\":{" +
+                        "\"crosswalk\":true," +
+                        "\"lanes\":{" +
+                            "\"straightLeft\":2," +
+                            "\"uturn\":1," +
+                        "}" +
+                    "}," +
+                    "\"east\":{" +
+                        "\"crosswalk\":true" +
+                    "}" +
+                "}";
+        return new JSONObject(jsonString);
     }
     @Test
     public void testRoadConfigurationJSON() {

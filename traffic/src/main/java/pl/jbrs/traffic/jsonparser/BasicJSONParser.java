@@ -45,50 +45,62 @@ public class BasicJSONParser implements JSONParser {
         return extractKeys(keys, this.json);
     }
 
-    // JSONArray for roads should be under
-    // key "roads"
+    // It's a mess, but multiply nested json must be done this way
     @Override
     public JSONObject roadConfigurationJSON() {
-        List<String> roadKeys = Stream.of(RoadOption.values())
-                .map(RoadOption::toString)
-                .toList();
-
-        JSONObject roadsJson = extractKeys(roadKeys, this.json);
+        JSONObject roadsJson = json.getJSONObject("roads");
 
         List<String> directionKeys = Stream.of(RoadDirection.values())
                 .map(RoadDirection::toString)
                 .toList();
 
         // Clear incorrect road directions
-        JSONObject lanesJson;
-        try {
-            lanesJson = extractKeys(directionKeys, roadsJson.getJSONObject(RoadOption.Lanes.toString()));
-        } catch (JSONException e) {
-            return roadsJson;
-        }
+        roadsJson = extractKeys(directionKeys, roadsJson);
+
+        List<String> keys = Stream.of(RoadOption.values())
+                .map(RoadOption::toString)
+                .toList();
 
         List<String> laneKeys = Stream.of(LaneDirection.values())
-                        .map(LaneDirection::toString)
-                        .toList();
+                .map(LaneDirection::toString)
+                .toList();
 
-        roadsJson.remove(RoadOption.Lanes.toString());
-        JSONObject lanesResult = new JSONObject();
         try {
-            lanesResult.put(RoadDirection.NORTH.toString(), extractKeys(laneKeys, lanesJson.getJSONObject(RoadDirection.NORTH.toString())));
-        } catch (JSONException ignored) {}
-        try {
-            lanesResult.put(RoadDirection.EAST.toString(), extractKeys(laneKeys, lanesJson.getJSONObject(RoadDirection.EAST.toString())));
-        } catch (JSONException ignored) {}
-        try {
-            lanesResult.put(RoadDirection.SOUTH.toString(), extractKeys(laneKeys, lanesJson.getJSONObject(RoadDirection.SOUTH.toString())));
-        } catch (JSONException ignored) {}
-        try {
-            lanesResult.put(RoadDirection.WEST.toString(), extractKeys(laneKeys, lanesJson.getJSONObject(RoadDirection.WEST.toString())));
+            JSONObject northRoad = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.NORTH.toString()));
+            try {
+                JSONObject northLanes = extractKeys(laneKeys, northRoad.getJSONObject(RoadOption.Lanes.toString()));
+                northRoad.put(RoadOption.Lanes.toString(), northLanes);
+            } catch (JSONException ignored) {}
+            roadsJson.put(RoadDirection.NORTH.toString(), northRoad);
         } catch (JSONException ignored) {}
 
-        if (!lanesResult.isEmpty()) {
-            roadsJson.put(RoadOption.Lanes.toString(), lanesResult);
-        }
+        try {
+            JSONObject eastRoad = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.EAST.toString()));
+            try {
+                JSONObject northLanes = extractKeys(laneKeys, eastRoad.getJSONObject(RoadOption.Lanes.toString()));
+                eastRoad.put(RoadOption.Lanes.toString(), northLanes);
+            } catch (JSONException ignored) {}
+            roadsJson.put(RoadDirection.EAST.toString(), eastRoad);
+        } catch (JSONException ignored) {}
+
+        try {
+            JSONObject southRoad = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.SOUTH.toString()));
+            try {
+                JSONObject northLanes = extractKeys(laneKeys, southRoad.getJSONObject(RoadOption.Lanes.toString()));
+                southRoad.put(RoadOption.Lanes.toString(), northLanes);
+            } catch (JSONException ignored) {}
+            roadsJson.put(RoadDirection.SOUTH.toString(), southRoad);
+        } catch (JSONException ignored) {}
+
+        try {
+            JSONObject westRoad = extractKeys(keys, roadsJson.getJSONObject(RoadDirection.WEST.toString()));
+            try {
+                JSONObject northLanes = extractKeys(laneKeys, westRoad.getJSONObject(RoadOption.Lanes.toString()));
+                westRoad.put(RoadOption.Lanes.toString(), northLanes);
+            } catch (JSONException ignored) {}
+            roadsJson.put(RoadDirection.WEST.toString(), westRoad);
+        } catch (JSONException ignored) {}
+
         return roadsJson;
     }
 }
