@@ -3,8 +3,13 @@ package pl.jbrs.traffic.model.road;
 public enum RoadDirection {
     NORTH, EAST, SOUTH, WEST;
 
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
+
     public static RoadDirection fromString(String direction) {
-        return switch (direction.toLowerCase()) {
+        return switch (direction) {
             case "north" -> NORTH;
             case "east" -> EAST;
             case "south" -> SOUTH;
