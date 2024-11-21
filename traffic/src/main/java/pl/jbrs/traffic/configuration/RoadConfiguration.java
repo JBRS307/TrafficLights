@@ -93,7 +93,8 @@ public class RoadConfiguration {
     }
 
     public void validate() throws InvalidRoadConfigurationException {
-        if (lanes.get(LaneDirection.UTURN) > 1 || lanes.get(LaneDirection.UTURN_LEFT) > 1) {
+        if ((lanes.containsKey(LaneDirection.UTURN) && lanes.get(LaneDirection.UTURN) > 1) ||
+            (lanes.containsKey(LaneDirection.UTURN_LEFT) && lanes.get(LaneDirection.UTURN_LEFT) > 1)) {
             throw new InvalidRoadConfigurationException("Road contains more than one uturn lane!");
         }
 
