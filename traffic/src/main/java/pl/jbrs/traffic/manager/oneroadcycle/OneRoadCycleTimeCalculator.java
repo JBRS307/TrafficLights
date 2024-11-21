@@ -41,6 +41,7 @@ public class OneRoadCycleTimeCalculator {
             }
         }
         restCars = Math.round(restCars / 3.0f);
-        return Math.round((float)stateCars / restCars) * config.getStateLength();
+        return Math.max(Math.round((float)stateCars / restCars) * config.getStateLength(),
+                        config.getMinStateLength());
     }
 }
