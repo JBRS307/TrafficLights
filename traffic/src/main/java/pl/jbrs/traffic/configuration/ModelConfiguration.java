@@ -1,5 +1,9 @@
 package pl.jbrs.traffic.configuration;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import pl.jbrs.traffic.jsonparser.options.ModelOption;
+
 public class ModelConfiguration {
     private int stateLength;
     private int priorityMultiplier;
@@ -13,6 +17,28 @@ public class ModelConfiguration {
         this.priorityMultiplier = DefaultModelConfiguration.PRIORITY_MULTIPLIER;
         this.yellowTime = DefaultModelConfiguration.YELLOW_TIME;
         this.minStateLength = DefaultModelConfiguration.MIN_STATE_LENGTH;
+    }
+
+    public static ModelConfiguration fromJSON(JSONObject json) {
+        ModelConfiguration modelConfiguration = new ModelConfiguration();
+
+        // All of the fields must be separately checked.
+        // If key doesn't exist, or type of value is invalid, then
+        // the config entry is ignored
+        try {
+            modelConfiguration.setStateLength(json.getInt(ModelOption.StateLength.toString()));
+        } catch (JSONException ignored) {}
+        try {
+            modelConfiguration.setPriorityMultiplier(json.getInt(ModelOption.PriorityMultiplier.toString()));
+        } catch (JSONException ignored) {}
+        try {
+            modelConfiguration.setYellowTime(json.getInt(ModelOption.YellowTime.toString()));
+        } catch (JSONException ignored) {}
+        try {
+            modelConfiguration.setMinStateLength(json.getInt(ModelOption.MinStateLength.toString()));
+        } catch (JSONException ignored) {}
+
+        return modelConfiguration;
     }
 
     public int getStateLength() {
