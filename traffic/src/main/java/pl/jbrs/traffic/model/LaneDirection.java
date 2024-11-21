@@ -20,7 +20,7 @@ public enum LaneDirection {
             case "straight" -> STRAIGHT;
             case "right" -> RIGHT;
             case "straightRight" -> STRAIGHT_RIGHT;
-            default -> null;
+            default -> throw new IllegalArgumentException("Invalid lane direction: " + direction);
         };
     }
 
