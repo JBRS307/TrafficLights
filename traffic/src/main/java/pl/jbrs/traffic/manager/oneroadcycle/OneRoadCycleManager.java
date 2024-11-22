@@ -1,6 +1,7 @@
 package pl.jbrs.traffic.manager.oneroadcycle;
 
 import pl.jbrs.traffic.manager.AbstractTrafficManager;
+import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.LightColor;
 import pl.jbrs.traffic.model.PedestrianLight;
 import pl.jbrs.traffic.model.road.Road;
@@ -62,6 +63,10 @@ public class OneRoadCycleManager extends AbstractTrafficManager {
                 .values()
                 .stream()
                 .flatMap(Collection::stream)
+                .forEach(light -> light.setColor(LightColor.GREEN));
+        roadMap.get(state.next().next().toRoadDirection())
+                .getLights()
+                .get(LaneDirection.RIGHT)
                 .forEach(light -> light.setColor(LightColor.GREEN));
     }
 
