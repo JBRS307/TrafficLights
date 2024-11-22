@@ -81,17 +81,6 @@ public class RoadConfigurationTest {
     }
 
     @Test
-    public void setPriorityTest() {
-        // when, then
-        assertThrowsExactly(IllegalArgumentException.class, () -> roadConfiguration.setPriority(0));
-
-        // when
-        roadConfiguration.setPriority(22);
-        // then
-        assertEquals(22, roadConfiguration.getPriority());
-    }
-
-    @Test
     public void putToLanesTest() {
         // when, then
         assertThrowsExactly(IllegalArgumentException.class, () -> {

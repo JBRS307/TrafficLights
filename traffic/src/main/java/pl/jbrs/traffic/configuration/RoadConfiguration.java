@@ -89,9 +89,6 @@ public class RoadConfiguration {
     }
 
     public void setPriority(int priority) {
-        if (priority < 1) {
-            throw new IllegalArgumentException("Priority must be greater than 0");
-        }
         this.priority = priority;
     }
 

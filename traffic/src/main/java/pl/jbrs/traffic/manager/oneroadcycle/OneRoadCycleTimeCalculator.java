@@ -39,6 +39,7 @@ public class OneRoadCycleTimeCalculator {
                     .mapToInt(TrafficLight::getWaitingCars)
                     .sum();
             sumOfCars += roadMap.get(roadDirection).getPriority() * config.getPriorityMultiplier();
+            sumOfCars = Math.max(sumOfCars, 0);
             if (roadDirection == currentDirection) {
                 stateCars += sumOfCars;
             } else {
@@ -46,8 +47,6 @@ public class OneRoadCycleTimeCalculator {
             }
         }
         restCars = Math.round(restCars / 3.0f);
-        // Should not be possible because priority cannot be lower than 1,
-        // but it's better to keep it independently safe
         if (restCars == 0) {
             restCars = 1;
         }
