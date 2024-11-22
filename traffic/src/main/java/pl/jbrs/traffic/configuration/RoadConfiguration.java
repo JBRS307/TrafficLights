@@ -9,6 +9,7 @@ import pl.jbrs.traffic.model.road.RoadDirection;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RoadConfiguration {
     private Map<LaneDirection, Integer> lanes;
@@ -27,8 +28,9 @@ public class RoadConfiguration {
             RoadConfiguration conf = new RoadConfiguration();
             JSONObject road;
             try {
-                road = json.getJSONObject(direction.name());
+                road = json.getJSONObject(direction.toString());
             } catch (JSONException e) {
+                confMap.put(direction, conf);
                 continue;
             }
 
@@ -52,12 +54,13 @@ public class RoadConfiguration {
 
             for (LaneDirection laneDirection : LaneDirection.values()) {
                 try {
-                    conf.putToLanes(laneDirection, lanes.getInt(laneDirection.name()));
+                    conf.putToLanes(laneDirection, lanes.getInt(laneDirection.toString()));
                 } catch (JSONException ignored) {
                 } catch (IllegalArgumentException e) {
                     System.err.println(e.getMessage());
                 }
             }
+            confMap.put(direction, conf);
         }
         return confMap;
     }
@@ -103,5 +106,16 @@ public class RoadConfiguration {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoadConfiguration that = (RoadConfiguration) o;
+        return crosswalk == that.crosswalk && priority == that.priority && Objects.equals(lanes, that.lanes);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lanes, crosswalk, priority);
+    }
 }
