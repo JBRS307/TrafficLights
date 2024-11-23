@@ -25,6 +25,14 @@ public class BasicSimulation implements Simulation {
         stateStepsLeft = 0;
     }
 
+    public Map<RoadDirection, Road> getRoadMap() {
+        return roadMap;
+    }
+
+    public TrafficManager getTrafficManager() {
+        return trafficManager;
+    }
+
     private List<Lane> getGreenLanes() {
         return roadMap.values()
                 .stream()
