@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 
 // Class extracts correct values from config.json file
 // During the process all invalid keys are omitted
-public class BasicJSONParser implements JSONParser {
+public class ConfigJSONParser implements JSONParser {
     private final JSONObject json;
-    public BasicJSONParser(String jsonString) throws JSONException {
+    public ConfigJSONParser(String jsonString) throws JSONException {
         this.json = new JSONObject(jsonString);
     }
 

@@ -5,14 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-public class BasicJSONParserTest {
+public class ConfigJSONParserTest {
     // given
-    private static BasicJSONParser parser;
+    private static ConfigJSONParser parser;
     @BeforeAll
     public static void initTestObject() {
         String sampleString =
@@ -35,7 +30,7 @@ public class BasicJSONParserTest {
                     "}" +
                 "}";
 
-        parser = new BasicJSONParser(sampleString);
+        parser = new ConfigJSONParser(sampleString);
     }
 
     @Test
