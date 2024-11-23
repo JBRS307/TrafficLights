@@ -24,7 +24,7 @@ public enum RoadDirection {
 
     public RoadDirection prev() {
         int res = this.toInt() - 1;
-        return res > 0 ? RoadDirection.fromInt(res) : RoadDirection.WEST;
+        return res >= 0 ? RoadDirection.fromInt(res) : RoadDirection.WEST;
     }
 
     public int toInt() {
