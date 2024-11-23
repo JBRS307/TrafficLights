@@ -3,10 +3,7 @@ package pl.jbrs.traffic.manager.oneroadcycle;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import pl.jbrs.traffic.configuration.ModelConfiguration;
-import pl.jbrs.traffic.model.Lane;
-import pl.jbrs.traffic.model.LaneDirection;
-import pl.jbrs.traffic.model.LightColor;
-import pl.jbrs.traffic.model.TrafficLight;
+import pl.jbrs.traffic.model.*;
 import pl.jbrs.traffic.model.road.Road;
 import pl.jbrs.traffic.model.road.RoadDirection;
 
@@ -16,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 
 public class OneRoadCycleManagerTest {
 
@@ -60,6 +58,14 @@ public class OneRoadCycleManagerTest {
         Mockito.when(eastRoad.getPriority()).thenReturn(1);
         Mockito.when(westRoad.getPriority()).thenReturn(1);
 
+        PedestrianLight northPedestrianLight = new PedestrianLight();
+        Mockito.when(northRoad.getPedestrianLight()).thenReturn(northPedestrianLight);
+        Mockito.when(northRoad.hasCrosswalk()).thenReturn(true);
+
+        PedestrianLight westPedestrianLight = new PedestrianLight();
+        Mockito.when(westRoad.getPedestrianLight()).thenReturn(westPedestrianLight);
+        Mockito.when(westRoad.hasCrosswalk()).thenReturn(true);
+
         Map<RoadDirection, Road> roadMap = new HashMap<>();
         roadMap.put(RoadDirection.NORTH, northRoad);
         roadMap.put(RoadDirection.SOUTH, southRoad);
@@ -73,6 +79,9 @@ public class OneRoadCycleManagerTest {
         // given
         Map<RoadDirection, Road> roadMap = prepareRoadMap();
         OneRoadCycleManager oneRoadCycleManager = new OneRoadCycleManager(roadMap, new ModelConfiguration());
+
+        // this light is green when north road has green light
+        roadMap.get(RoadDirection.WEST).getPedestrianLight().setColor(LightColor.GREEN);
 
         List<TrafficLight> northLights = roadMap.get(RoadDirection.NORTH)
                 .getLights()
@@ -118,7 +127,12 @@ public class OneRoadCycleManagerTest {
         westLight.forEach(light -> {
             assertEquals(LightColor.RED, light.getColor());
         });
+        assertEquals(LightColor.RED, roadMap.get(RoadDirection.WEST).getPedestrianLight().getColor());
 
+
+        // given
+        // simulate someone pressing button on the signaler, that should turn green next step
+        roadMap.get(RoadDirection.NORTH).getPedestrianLight().setButtonPressed(true);
 
         // when
         oneRoadCycleManager.nextState();
@@ -151,6 +165,7 @@ public class OneRoadCycleManagerTest {
         westLight.forEach(light -> {
             assertEquals(LightColor.RED, light.getColor());
         });
+        assertEquals(LightColor.GREEN, roadMap.get(RoadDirection.NORTH).getPedestrianLight().getColor());
     }
 
 }
