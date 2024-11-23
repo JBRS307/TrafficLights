@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser.options;
+package pl.jbrs.traffic.jsonparser.configoptions;
 
 import org.junit.jupiter.api.Test;
 

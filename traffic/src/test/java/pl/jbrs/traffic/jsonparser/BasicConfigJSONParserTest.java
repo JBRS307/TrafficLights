@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-public class ConfigJSONParserTest {
+public class BasicConfigJSONParserTest {
     // given
-    private static ConfigJSONParser parser;
+    private static BasicConfigJSONParser parser;
     @BeforeAll
     public static void initTestObject() {
         String sampleString =
@@ -30,7 +30,7 @@ public class ConfigJSONParserTest {
                     "}" +
                 "}";
 
-        parser = new ConfigJSONParser(sampleString);
+        parser = new BasicConfigJSONParser(sampleString);
     }
 
     @Test

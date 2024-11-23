@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser.options;
+package pl.jbrs.traffic.jsonparser.configoptions;
 
 public enum ModelOption {
     StateLength,

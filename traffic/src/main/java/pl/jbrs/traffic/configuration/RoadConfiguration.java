@@ -3,7 +3,7 @@ package pl.jbrs.traffic.configuration;
 import org.json.JSONException;
 import org.json.JSONObject;
 import pl.jbrs.traffic.exception.InvalidRoadConfigurationException;
-import pl.jbrs.traffic.jsonparser.options.RoadOption;
+import pl.jbrs.traffic.jsonparser.configoptions.RoadOption;
 import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.road.RoadDirection;
 
