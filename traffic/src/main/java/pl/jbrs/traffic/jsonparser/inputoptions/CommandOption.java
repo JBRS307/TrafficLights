@@ -13,4 +13,13 @@ public enum CommandOption {
             case Step -> "step";
         };
     }
+
+    public static CommandOption fromString(String option) {
+        return switch (option) {
+            case "addVehicle" -> AddVehicle;
+            case "addPedestrian" -> AddPedestrian;
+            case "step" -> Step;
+            default -> throw new IllegalArgumentException("Unknown command " + option);
+        };
+    }
 }
