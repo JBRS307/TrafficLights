@@ -5,6 +5,7 @@ import pl.jbrs.traffic.model.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 // Abstract class for road, contains common attributes and default implementations
 public abstract class AbstractRoad implements Road {
@@ -21,7 +22,7 @@ public abstract class AbstractRoad implements Road {
         this.priority = priority;
     }
 
-    protected Lane getBestLane(List<LaneDirection> possibleLanes) {
+    protected Optional<Lane> getBestLane(List<LaneDirection> possibleLanes) {
         Lane bestLane = null;
         int minWaitingCars = Integer.MAX_VALUE;
         for (LaneDirection laneDirection : possibleLanes) {
@@ -36,13 +37,18 @@ public abstract class AbstractRoad implements Road {
                 }
             }
         }
-        return bestLane;
+        return Optional.ofNullable(bestLane);
     }
 
     @Override
     public void addVehicle(Vehicle v) {
         List<LaneDirection> possibleLanes = LaneDirection.fromMoveDirection(MoveDirection.calcDirection(v.startRoad(), v.endRoad()));
-        getBestLane(possibleLanes).addVehicle(v);
+        Optional<Lane> bestLaneOptional = getBestLane(possibleLanes);
+        if (bestLaneOptional.isPresent()) {
+            bestLaneOptional.get().addVehicle(v);
+        } else {
+            System.err.println("Vehicle " + v.id() + " omitted, as it tries to make impossible move!");
+        }
     }
 
     @Override
