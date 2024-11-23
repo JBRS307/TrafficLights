@@ -1,5 +1,6 @@
 package pl.jbrs.traffic.model.road;
 
+import pl.jbrs.traffic.exception.NoCrosswalkException;
 import pl.jbrs.traffic.model.*;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public abstract class AbstractRoad implements Road {
         Lane bestLane = null;
         int minWaitingCars = Integer.MAX_VALUE;
         for (LaneDirection laneDirection : possibleLanes) {
+            if (!trafficLights.containsKey(laneDirection)) {
+                continue;
+            }
             for (TrafficLight trafficLight : trafficLights.get(laneDirection).reversed()) { // It's reversed to start at the rightmost lane
                 int waitingCars = trafficLight.getWaitingCars();
                 if (waitingCars < minWaitingCars) {
@@ -72,8 +76,12 @@ public abstract class AbstractRoad implements Road {
     }
 
     @Override
-    public void movePedestrians() {}
+    public void movePedestrians() {
+        throw new NoCrosswalkException("There is no crosswalk on " + direction + " road");
+    }
 
     @Override
-    public void addPedestrian() {}
+    public void addPedestrian() {
+        throw new NoCrosswalkException("There is no crosswalk on " + direction + " road");
+    }
 }
