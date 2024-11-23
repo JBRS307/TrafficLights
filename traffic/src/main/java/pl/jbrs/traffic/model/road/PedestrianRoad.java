@@ -1,6 +1,8 @@
 package pl.jbrs.traffic.model.road;
 
+import pl.jbrs.traffic.exception.MoveOnRedException;
 import pl.jbrs.traffic.model.LaneDirection;
+import pl.jbrs.traffic.model.LightColor;
 import pl.jbrs.traffic.model.PedestrianLight;
 import pl.jbrs.traffic.model.TrafficLight;
 
@@ -15,6 +17,14 @@ public class PedestrianRoad extends BasicRoad {
     public PedestrianRoad(RoadDirection direction, Map<LaneDirection, List<TrafficLight>> trafficLights, PedestrianLight pedestrianLight, int priority) {
         super(direction, trafficLights, priority);
         this.pedestrianLight = pedestrianLight;
+    }
+
+    public int getPedestriansWaiting() {
+        return pedestriansWaiting;
+    }
+
+    public int getPedestriansOnRoad() {
+        return pedestriansOnRoad;
     }
 
     @Override
@@ -38,6 +48,9 @@ public class PedestrianRoad extends BasicRoad {
     // pedestriansWaiting then goes to 0
     @Override
     public void movePedestrians() {
+        if (getPedestrianLight().getColor() == LightColor.RED) {
+            throw new MoveOnRedException("Pedestrians on road " + direction + " tried to go on red!");
+        }
         pedestriansOnRoad = pedestriansWaiting;
         pedestriansWaiting = 0;
     }
