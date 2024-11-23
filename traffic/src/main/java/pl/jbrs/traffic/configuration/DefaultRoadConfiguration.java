@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class DefaultRoadConfiguration {
     public static final boolean CROSSWALK = false;
-    public static final int PRIORITY = 1;
+    public static final int PRIORITY = 0;
 
     public static Map<LaneDirection, Integer> defaultLanes() {
         Map<LaneDirection, Integer> lanes = new HashMap<>();
