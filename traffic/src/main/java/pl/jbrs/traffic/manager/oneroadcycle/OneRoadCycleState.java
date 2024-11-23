@@ -20,7 +20,7 @@ public enum OneRoadCycleState {
 
     public OneRoadCycleState prev() {
         int res = this.toInt() - 1;
-        return res > 0 ? OneRoadCycleState.fromInt(res) : OneRoadCycleState.WEST_YELLOW;
+        return res >= 0 ? OneRoadCycleState.fromInt(res) : OneRoadCycleState.WEST_YELLOW;
     }
 
     public RoadDirection toRoadDirection() {
