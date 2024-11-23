@@ -45,7 +45,7 @@ public enum LaneDirection {
     public static List<LaneDirection> fromMoveDirection(MoveDirection moveDirection) {
         return switch (moveDirection) {
             case UTURN -> List.of(UTURN, UTURN_LEFT);
-            case LEFT -> List.of(STRAIGHT_LEFT, LEFT);
+            case LEFT -> List.of(STRAIGHT_LEFT, LEFT, UTURN_LEFT);
             case STRAIGHT -> List.of(STRAIGHT_LEFT, STRAIGHT, STRAIGHT_RIGHT);
             case RIGHT -> List.of(STRAIGHT_RIGHT, STRAIGHT);
         };
