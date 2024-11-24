@@ -25,8 +25,18 @@
             "endRoad": "east"
         },
         {
+            "type": "addVehicle",
+            "vehicleId": "vehicle5",
+            "startRoad": "east",
+            "endRoad": "north"
+        },
+        {
             "type": "addPedestrian",
             "road": "east"
+        },
+        {
+            "type": "addPedestrian",
+            "road": "west"
         },
         {
             "type": "step"

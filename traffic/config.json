@@ -2,7 +2,10 @@
     "stateLength": 5,
     "roads": {
         "east": {
-            "crosswalk": true
+            "crosswalk": true,
+            "lanes": {
+                "right": 0
+            }
         }
     }
 }
