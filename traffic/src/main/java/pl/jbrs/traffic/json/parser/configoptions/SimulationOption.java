@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser.configoptions;
+package pl.jbrs.traffic.json.parser.configoptions;
 
 public enum SimulationOption {
     TrafficStrategy;

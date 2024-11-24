@@ -1,11 +1,11 @@
-package pl.jbrs.traffic.jsonparser;
+package pl.jbrs.traffic.json.parser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.jbrs.traffic.jsonparser.inputoptions.AddPedestrianOption;
-import pl.jbrs.traffic.jsonparser.inputoptions.AddVehicleOption;
-import pl.jbrs.traffic.jsonparser.inputoptions.CommandOption;
+import pl.jbrs.traffic.json.parser.inputoptions.AddPedestrianOption;
+import pl.jbrs.traffic.json.parser.inputoptions.AddVehicleOption;
+import pl.jbrs.traffic.json.parser.inputoptions.CommandOption;
 import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.command.AddCarCommand;
 import pl.jbrs.traffic.simulation.command.AddPedestrianCommand;

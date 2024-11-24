@@ -2,7 +2,7 @@ package pl.jbrs.traffic.configuration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.jbrs.traffic.jsonparser.configoptions.SimulationOption;
+import pl.jbrs.traffic.json.parser.configoptions.SimulationOption;
 
 public class SimulationConfiguration {
     private TrafficStrategy trafficStrategy;

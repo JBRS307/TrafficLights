@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser;
+package pl.jbrs.traffic.json;
 
 import java.io.IOException;
 import java.nio.file.Files;

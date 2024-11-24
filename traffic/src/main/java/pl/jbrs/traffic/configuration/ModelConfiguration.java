@@ -2,7 +2,7 @@ package pl.jbrs.traffic.configuration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.jbrs.traffic.jsonparser.configoptions.ModelOption;
+import pl.jbrs.traffic.json.parser.configoptions.ModelOption;
 
 public class ModelConfiguration {
     private int stateLength;

@@ -1,10 +1,10 @@
-package pl.jbrs.traffic.jsonparser;
+package pl.jbrs.traffic.json.parser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.jbrs.traffic.jsonparser.configoptions.ModelOption;
-import pl.jbrs.traffic.jsonparser.configoptions.RoadOption;
-import pl.jbrs.traffic.jsonparser.configoptions.SimulationOption;
+import pl.jbrs.traffic.json.parser.configoptions.ModelOption;
+import pl.jbrs.traffic.json.parser.configoptions.RoadOption;
+import pl.jbrs.traffic.json.parser.configoptions.SimulationOption;
 import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.road.RoadDirection;
 

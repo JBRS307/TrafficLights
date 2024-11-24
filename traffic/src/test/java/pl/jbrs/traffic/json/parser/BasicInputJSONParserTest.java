@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser;
+package pl.jbrs.traffic.json.parser;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

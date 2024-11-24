@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser.inputoptions;
+package pl.jbrs.traffic.json.parser.inputoptions;
 
 public enum AddPedestrianOption {
     Road;

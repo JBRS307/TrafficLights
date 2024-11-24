@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.jsonparser;
+package pl.jbrs.traffic.json.parser;
 
 import pl.jbrs.traffic.simulation.command.Command;
 
