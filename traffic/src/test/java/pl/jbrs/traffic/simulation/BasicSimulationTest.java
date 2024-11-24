@@ -7,6 +7,7 @@ import pl.jbrs.traffic.configuration.RoadConfiguration;
 import pl.jbrs.traffic.configuration.SimulationConfiguration;
 import pl.jbrs.traffic.creator.BasicSimulationCreator;
 import pl.jbrs.traffic.creator.SimulationCreator;
+import pl.jbrs.traffic.exception.ImpossibleMoveException;
 import pl.jbrs.traffic.exception.NoCrosswalkException;
 import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.Vehicle;
@@ -24,6 +25,8 @@ public class BasicSimulationTest {
     public void prepareSimulation() {
         RoadConfiguration southRoadConfig = new RoadConfiguration();
         southRoadConfig.setCrosswalk(true);
+        southRoadConfig.putToLanes(LaneDirection.UTURN_LEFT, 0);
+        southRoadConfig.putToLanes(LaneDirection.LEFT, 1);
         Map<RoadDirection, RoadConfiguration> roadConfig = Map.ofEntries(
                 Map.entry(RoadDirection.NORTH, new RoadConfiguration()),
                 Map.entry(RoadDirection.EAST, new RoadConfiguration()),
@@ -48,7 +51,7 @@ public class BasicSimulationTest {
         Vehicle added1 = basicSimulation.getRoadMap()
                 .get(RoadDirection.SOUTH)
                 .getLights()
-                .get(LaneDirection.UTURN_LEFT)
+                .get(LaneDirection.LEFT)
                 .getFirst()
                 .getLane().checkFirstVehicle();
         Vehicle added2 = basicSimulation.getRoadMap()
@@ -60,6 +63,12 @@ public class BasicSimulationTest {
 
         assertEquals(v1, added1);
         assertEquals(v2, added2);
+
+        // given
+        Vehicle v3 = new Vehicle("v3", RoadDirection.SOUTH, RoadDirection.SOUTH);
+        // when, then
+        assertThrows(ImpossibleMoveException.class, () -> basicSimulation.addVehicle(v3));
+
     }
 
     @Test
