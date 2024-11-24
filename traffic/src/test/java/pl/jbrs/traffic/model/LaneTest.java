@@ -2,6 +2,7 @@ package pl.jbrs.traffic.model;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.jbrs.traffic.exception.VehicleExistsException;
 import pl.jbrs.traffic.model.road.RoadDirection;
 
 import java.util.ArrayList;
@@ -33,6 +34,18 @@ public class LaneTest {
         lane.moveVehicle();
         // then
         assertEquals(vehicles.get(1), lane.checkFirstVehicle());
+    }
+
+    @Test
+    public void addVehicleThrowTest() {
+        // given
+        Lane lane = new Lane(LaneDirection.STRAIGHT);
+        vehicles.forEach(lane::addVehicle);
+
+        Vehicle v = new Vehicle("v0", RoadDirection.SOUTH, RoadDirection.NORTH);
+
+        // when, then
+        assertThrows(VehicleExistsException.class, () -> lane.addVehicle(v));
     }
 
 }
