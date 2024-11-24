@@ -1,6 +1,7 @@
 package pl.jbrs.traffic.simulation;
 
 import org.json.JSONObject;
+import pl.jbrs.traffic.exception.VehicleExistsException;
 import pl.jbrs.traffic.manager.TrafficManager;
 import pl.jbrs.traffic.model.Lane;
 import pl.jbrs.traffic.model.LightColor;
@@ -11,8 +12,10 @@ import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.result.BasicSimulationResult;
 import pl.jbrs.traffic.simulation.result.SimulationResult;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,7 @@ public class BasicSimulation implements Simulation {
     private final Map<RoadDirection, Road> roadMap;
     private final TrafficManager trafficManager;
     private final SimulationResult simulationResult;
+    private final Set<String> idSet = new HashSet<>();
 
     private int stateStepsLeft = 0;
 
@@ -77,6 +81,7 @@ public class BasicSimulation implements Simulation {
             Vehicle vehicle = lane.checkFirstVehicle();
             if (vehicle != null && vehicle.canDrive(greenPedestrianRoads)) {
                 lane.moveVehicle();
+                idSet.remove(vehicle.id());
                 simulationResult.addVehicleToCurrentStep(vehicle);
             }
         });
@@ -85,8 +90,13 @@ public class BasicSimulation implements Simulation {
     }
 
     @Override
-    public void addVehicle(Vehicle vehicle) {
-        roadMap.get(vehicle.startRoad()).addVehicle(vehicle);
+    public void addVehicle(Vehicle vehicle) throws VehicleExistsException {
+        if (!idSet.contains(vehicle.id())) {
+            roadMap.get(vehicle.startRoad()).addVehicle(vehicle);
+            idSet.add(vehicle.id());
+        } else {
+            throw new VehicleExistsException("Vehicle with id " + vehicle.id() + " already exists");
+        }
     }
 
     @Override
