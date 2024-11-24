@@ -36,10 +36,7 @@ public class RoadConfiguration {
 
             try {
                 conf.setPriority(road.getInt(RoadOption.Priority.toString()));
-            } catch (JSONException ignored) {
-            } catch (IllegalArgumentException e) {
-                System.err.println(e.getMessage());
-            }
+            } catch (JSONException ignored) {}
 
             try {
                 conf.setCrosswalk(road.getBoolean(RoadOption.Crosswalk.toString()));
@@ -49,6 +46,7 @@ public class RoadConfiguration {
             try {
                 lanes = road.getJSONObject(RoadOption.Lanes.toString());
             } catch (JSONException e) {
+                confMap.put(direction, conf);
                 continue;
             }
 
@@ -58,6 +56,7 @@ public class RoadConfiguration {
                 } catch (JSONException ignored) {
                 } catch (IllegalArgumentException e) {
                     System.err.println(e.getMessage());
+                    System.out.println("Road " + direction + " at lane direction " + laneDirection + ": value not set!");
                 }
             }
             confMap.put(direction, conf);
