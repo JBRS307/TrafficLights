@@ -1,5 +1,5 @@
 {
-    "stateLength": 1,
+    "stateLength": 5,
     "roads": {
         "east": {
             "crosswalk": true
