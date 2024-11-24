@@ -48,6 +48,9 @@ public class BasicConfigJSONParser implements ConfigJSONParser {
     // It's a mess, but multiply nested json must be done this way
     @Override
     public JSONObject roadConfigurationJSON() {
+        if (!json.has("roads")) {
+            return new JSONObject();
+        }
         JSONObject roadsJson = json.getJSONObject("roads");
 
         List<String> directionKeys = Stream.of(RoadDirection.values())
