@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class jsonIO {
+public class JsonIO {
     private String inputPath;
     private String outputPath;
     private String configPath;
 
-    public jsonIO(String inputPath, String outputPath, String configPath) {
+    public JsonIO(String inputPath, String outputPath, String configPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
         this.configPath = configPath;
@@ -42,7 +42,7 @@ public class jsonIO {
         this.configPath = configPath;
     }
 
-    public jsonIO() {
+    public JsonIO() {
         this(DefaultPaths.INPUT, DefaultPaths.OUTPUT, DefaultPaths.CONFIG);
     }
 
@@ -55,6 +55,8 @@ public class jsonIO {
     }
 
     public void writeOutput(JSONObject json) throws IOException {
-        Files.writeString(Path.of(outputPath), json.toString(4));
+        String jsonString = json.toString(4);
+        System.out.println(jsonString);
+        Files.writeString(Path.of(outputPath), jsonString);
     }
 }
