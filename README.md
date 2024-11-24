@@ -95,3 +95,57 @@ Default lanes for each road are:
 - 1 u-turn-left lane
 - 1 straight lane
 - 1 right lane
+
+Sample config:
+```json
+{
+    "stateLength": 5,
+    "roads": {
+        "east": {
+            "crosswalk": true,
+            "lanes": {
+                "right": 0
+            }
+        }
+    }
+}
+```
+It will change state length to 5, add a crosswalk to the eastern road and remove all lanes to turn right on this road.
+
+All configuration keys not included in this file and all incorrect values will be omitted and corresponding values will be kept at default.
+
+## Commands
+For the simulation to run there must be a list of commands provided in a file ```input.json``` put in the same directory as ```jar``` file.
+
+Input file should be given in following form
+```json
+{
+    "commands": [
+        {
+            "type": // ...
+            // options
+        },
+        {
+            "type": // ...
+            // options
+        }
+        // ...
+    ]
+}
+```
+
+
+Available values for ```"type"```:
+- ```"addVehicle"``` - this command adds vehicle to a given road. Options of this command are
+    - ```"vehicleId"``` - string, id of a vehicle.
+    - ```"startRoad"``` - string, either ```"north"```, ```"east"```, ```"south"``` or ```"west"```. The road that vehicle should be placed onto.
+    - ```"endRoad"``` - string, values the same as for ```"startRoad"```. Destination of the vehicle.
+- ```"addPedestrian"``` - commands that adds pedestrian to cross the road. Options are:
+    - ```"road"``` - string, to which road should pedestrian be added. Values the same as for ```"startRoad"```.
+- ```"step"``` - commands tells simulation to make a step.
+
+All commands are executed in order they are in the JSON file. Every command with invalid key or value will be ommitted. Commands that try to make illegal moves (i.e. adding vehicle with the same ID, adding pedestrian to the road without crosswalk or adding a vehicle with impossible move) will be ommitted.
+
+An impossible move is a move where a car tries to go some direction, but there are no valid lanes to do so.
+
+When car is added to the road it goes to the lane with least amount of cars. If there are multiple lanes like that it goes to the rightmost lane.
