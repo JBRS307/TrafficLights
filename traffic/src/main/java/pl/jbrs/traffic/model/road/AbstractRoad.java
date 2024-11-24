@@ -1,5 +1,6 @@
 package pl.jbrs.traffic.model.road;
 
+import pl.jbrs.traffic.exception.ImpossibleMoveException;
 import pl.jbrs.traffic.exception.NoCrosswalkException;
 import pl.jbrs.traffic.model.*;
 
@@ -47,7 +48,7 @@ public abstract class AbstractRoad implements Road {
         if (bestLaneOptional.isPresent()) {
             bestLaneOptional.get().addVehicle(v);
         } else {
-            System.err.println("Vehicle " + v.id() + " omitted, as it tries to make impossible move!");
+            throw new ImpossibleMoveException("Vehicle " + v.id() + " tries to make impossible move!");
         }
     }
 
