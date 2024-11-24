@@ -6,6 +6,7 @@ import pl.jbrs.traffic.configuration.RoadConfiguration;
 import pl.jbrs.traffic.configuration.SimulationConfiguration;
 import pl.jbrs.traffic.creator.BasicSimulationCreator;
 import pl.jbrs.traffic.creator.SimulationCreator;
+import pl.jbrs.traffic.exception.CommandException;
 import pl.jbrs.traffic.exception.MissingInputFileException;
 import pl.jbrs.traffic.json.JsonIO;
 import pl.jbrs.traffic.json.parser.BasicConfigJSONParser;
@@ -85,7 +86,12 @@ public class Application {
 
     public void runSimulation() {
         for (Command command : commandQueue) {
-            command.execute(simulation);
+            try {
+                command.execute(simulation);
+            } catch (CommandException e) {
+                System.err.println("Illegal command!");
+                System.out.println(e.getMessage());
+            }
         }
     }
 
