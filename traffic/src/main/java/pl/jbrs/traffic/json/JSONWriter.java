@@ -1,4 +1,4 @@
-package pl.jbrs.traffic.json.writer;
+package pl.jbrs.traffic.json;
 
 import org.json.JSONObject;
 
