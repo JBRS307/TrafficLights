@@ -30,6 +30,7 @@ public class ModelConfiguration {
         } catch (JSONException ignored) {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.out.println("State length not set, default value kept!");
         }
 
         try {
@@ -37,6 +38,7 @@ public class ModelConfiguration {
         } catch (JSONException ignored) {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.out.println("Priority multiplier not set, default value kept!");
         }
 
         try {
@@ -44,6 +46,7 @@ public class ModelConfiguration {
         } catch (JSONException ignored) {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.out.println("Yellow time not set, default value kept!");
         }
 
         try {
@@ -51,6 +54,7 @@ public class ModelConfiguration {
         } catch (JSONException ignored) {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.out.println("Minimal state length not set, default value kept");
         }
 
         return modelConfiguration;
@@ -61,8 +65,8 @@ public class ModelConfiguration {
     }
 
     public void setStateLength(int stateLength) {
-        if (stateLength < 1) {
-            throw new IllegalArgumentException("stateLength must be greater than 0");
+        if (stateLength < DefaultModelConfiguration.STATE_LENGTH_LOWER_LIMIT) {
+            throw new IllegalArgumentException("stateLength must be greater than " + DefaultModelConfiguration.STATE_LENGTH_LOWER_LIMIT);
         }
         this.stateLength = stateLength;
     }
@@ -94,8 +98,8 @@ public class ModelConfiguration {
     }
 
     public void setMinStateLength(int minStateLength) {
-        if (minStateLength < 1) {
-            throw new IllegalArgumentException("minStateLength must be greater than 0");
+        if (minStateLength < DefaultModelConfiguration.STATE_LENGTH_LOWER_LIMIT) {
+            throw new IllegalArgumentException("minStateLength must be greater than " + DefaultModelConfiguration.STATE_LENGTH_LOWER_LIMIT);
         }
         this.minStateLength = minStateLength;
     }
