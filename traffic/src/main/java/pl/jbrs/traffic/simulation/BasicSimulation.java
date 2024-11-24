@@ -59,7 +59,7 @@ public class BasicSimulation implements Simulation {
     private Map<RoadDirection, Road> getGreenPedestrianRoads() {
         return roadMap.values()
                 .stream()
-                .filter(road -> road.getPedestrianLight().getColor() == LightColor.GREEN)
+                .filter(road -> (road.hasCrosswalk() && road.getPedestrianLight().getColor() == LightColor.GREEN))
                 .collect(Collectors.toMap(Road::getDirection, Function.identity()));
     }
 
