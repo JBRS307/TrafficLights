@@ -58,6 +58,8 @@ public class PedestrianRoad extends BasicRoad {
     @Override
     public void addPedestrian() {
         pedestriansWaiting++;
-        pedestrianLight.setButtonPressed(true);
+        if (pedestrianLight.getColor() == LightColor.RED) {
+            pedestrianLight.setButtonPressed(true);
+        }
     }
 }
