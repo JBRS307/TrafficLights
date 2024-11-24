@@ -11,6 +11,6 @@ public record Vehicle(String id, RoadDirection startRoad, RoadDirection endRoad)
         if (myRoad == null) {
             return true;
         }
-        return myRoad.isPedestrianCrossing();
+        return !myRoad.isPedestrianCrossing();
     }
 }

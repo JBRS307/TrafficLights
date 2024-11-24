@@ -17,11 +17,18 @@ public class VehicleTest {
         // given
         Map<RoadDirection, Road> greenRoads = new HashMap<>();
         PedestrianRoad pedestrianRoad = new PedestrianRoad(RoadDirection.EAST, Map.of(), new PedestrianLight(), 0);
+        pedestrianRoad.getPedestrianLight().setColor(LightColor.GREEN);
         greenRoads.put(RoadDirection.EAST, pedestrianRoad);
 
         Vehicle vehicle = new Vehicle("v1", RoadDirection.SOUTH, RoadDirection.EAST);
 
         // when, then
+        assertTrue(vehicle.canDrive(greenRoads));
+
+        // when
+        pedestrianRoad.addPedestrian();
+        pedestrianRoad.movePedestrians();
+        // then
         assertFalse(vehicle.canDrive(greenRoads));
 
         // given
