@@ -1,5 +1,6 @@
 package pl.jbrs.traffic.simulation.command;
 
+import pl.jbrs.traffic.exception.CommandException;
 import pl.jbrs.traffic.model.road.RoadDirection;
 import pl.jbrs.traffic.simulation.Simulation;
 
@@ -11,7 +12,7 @@ public class AddPedestrianCommand implements Command {
     }
 
     @Override
-    public void execute(Simulation simulation) {
+    public void execute(Simulation simulation) throws CommandException {
         simulation.addPedestrian(roadDirection);
     }
 }
