@@ -22,9 +22,9 @@ java -jar traffic-1.0.jar
 ## How it works?
 
 The algorithm counts cars waiting at each road and at each lane. When light is about to change it uses the number of waiting cars to calculate how long next green light cycle should take. Calculation is done by the following formula
-$$T \approx \frac{C_g}{C_r} \cdot T_B$$
-$$C_g = C_{ng} + P \cdot P_m$$
-$$C_r = \left(C_{nr} + P \cdot P_m \right) \div (N - 1)$$
+$$T \approx \frac{C_g}{C_r} \cdot T_B$$  
+$$C_g = C_{ng} + P \cdot P_m$$  
+$$C_r = \left(C_{nr} + P \cdot P_m \right) \div (N - 1)$$  
 where
 - $T$ is time of the next green cycle rounded to the nearest integer.
 - $T_B$ is fixed base value to calculate state length
