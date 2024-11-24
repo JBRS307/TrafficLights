@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'pl.jbrs.traffic'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.12.0'
+    testImplementation 'org.skyscreamer:jsonassert:2.0-rc1'
+    implementation 'org.json:json:20240303'
+}
+
+test {
+    useJUnitPlatform()
+}
