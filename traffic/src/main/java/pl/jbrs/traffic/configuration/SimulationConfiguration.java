@@ -19,6 +19,7 @@ public class SimulationConfiguration {
             // NOTHING HERE
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.out.println("Traffic strategy not set, default value kept!");
         }
         return simulationConfiguration;
     }
