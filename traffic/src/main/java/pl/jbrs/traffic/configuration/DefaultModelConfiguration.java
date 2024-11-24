@@ -12,4 +12,7 @@ public class DefaultModelConfiguration {
     public static final int YELLOW_TIME = 3;
 
     public static final int MIN_STATE_LENGTH = 5;
+
+    // DO NOT CHANGE
+    public static final int STATE_LENGTH_LOWER_LIMIT = 2;
 }
