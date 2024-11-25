@@ -16,8 +16,9 @@ cd build/libs
 ```
 and run with
 ```bash
-java -jar traffic-1.0.jar
+java -jar traffic-1.0.jar [path_to_input] [path_to_output] [path_to_config]
 ```
+All arguments are optional, however they must be provided in order (i.e. if you want to provide config you have to provide input and output paths).
 
 ## How it works?
 
@@ -144,8 +145,127 @@ Available values for ```"type"```:
     - ```"road"``` - string, to which road should pedestrian be added. Values the same as for ```"startRoad"```.
 - ```"step"``` - commands tells simulation to make a step.
 
+```json
+{
+    "commands": [
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle1",
+            "startRoad": "south",
+            "endRoad": "north"
+        },
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle2",
+            "startRoad": "north",
+            "endRoad": "south"
+        },
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle3",
+            "startRoad": "south",
+            "endRoad": "south"
+        },
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle4",
+            "startRoad": "south",
+            "endRoad": "east"
+        },
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle5",
+            "startRoad": "east",
+            "endRoad": "north"
+        },
+        {
+            "type": "addPedestrian",
+            "road": "east"
+        },
+        {
+            "type": "addPedestrian",
+            "road": "west"
+        },
+        {
+            "type": "addVehicle",
+            "vehicleId": "vehicle1",
+            "startRoad": "west",
+            "endRoad": "north"
+        },
+        {
+            "type": "step"
+        },
+        {
+            "type": "step"
+        },
+        {
+            "type": "step"
+        }
+    ]
+}
+```
+Sample input. When combined with sample config it contains mistakes, which will be ommitted.
+
 All commands are executed in order they are in the JSON file. Every command with invalid key or value will be ommitted. Commands that try to make illegal moves (i.e. adding vehicle with the same ID, adding pedestrian to the road without crosswalk or adding a vehicle with impossible move) will be ommitted.
 
 An impossible move is a move where a car tries to go some direction, but there are no valid lanes to do so.
 
 When car is added to the road it goes to the lane with least amount of cars. If there are multiple lanes like that it goes to the rightmost lane.
+
+## ```Application```
+Class responsible for managing commands and running them on simulation.
+
+Application is created with static method
+```java
+public static Application fromArgs(String[] args);
+```
+It created application dependent of args.
+
+Two functions are
+```java
+public void runSimulation();
+
+public void saveSimulationToJSON();
+```
+First one runs commands parsed from input file.  
+Second one saves current state of simulation into output file.
+
+## Interfaces
+Short description of interfaces.
+
+### ```Simulation```
+Main interface responsible for simulation management. It has 4, 3 oh them are responsible for commands, 1 for generating result JSON.
+```java
+void step();
+
+void addPedestrian(RoadDirection roadDirection);
+
+void addVehicle(Vehicle vehicle);
+```
+Responsible for corresponding commands
+
+```java
+JSONObject getSimulationResultJSON();
+```
+Responsible for generating result as ```JSONObject```.
+
+### ```SimulationCreator```
+Creates simulation from provided (or default) config.
+
+```java
+Simulation createSimulation();
+```
+
+### ```Command```
+Command for simulation
+```java
+void execute(Simulation simulation);
+```
+Executes given command for provided simulation.
+
+### ```TrafficManager```
+Interface for strategies. Manages intersection dependent on implementation.
+```java
+int nextState();
+```
+This method changes the state and returns how many steps it should last.
