@@ -9,6 +9,7 @@ import pl.jbrs.traffic.creator.BasicSimulationCreator;
 import pl.jbrs.traffic.creator.SimulationCreator;
 import pl.jbrs.traffic.exception.ImpossibleMoveException;
 import pl.jbrs.traffic.exception.NoCrosswalkException;
+import pl.jbrs.traffic.exception.VehicleExistsException;
 import pl.jbrs.traffic.model.LaneDirection;
 import pl.jbrs.traffic.model.Vehicle;
 import pl.jbrs.traffic.model.road.PedestrianRoad;
@@ -68,6 +69,9 @@ public class BasicSimulationTest {
         Vehicle v3 = new Vehicle("v3", RoadDirection.SOUTH, RoadDirection.SOUTH);
         // when, then
         assertThrows(ImpossibleMoveException.class, () -> basicSimulation.addVehicle(v3));
+
+        // when, then
+        assertThrows(VehicleExistsException.class, () -> basicSimulation.addVehicle(v1));
 
     }
 
