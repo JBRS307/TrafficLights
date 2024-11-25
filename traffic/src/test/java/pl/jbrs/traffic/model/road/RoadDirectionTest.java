@@ -40,17 +40,19 @@ public class RoadDirectionTest {
 
     @Test
     public void nextTest() {
-        // Only edge value
-
         // given, when, then
+        assertEquals(RoadDirection.EAST, RoadDirection.NORTH.next());
+        assertEquals(RoadDirection.SOUTH, RoadDirection.EAST.next());
+        assertEquals(RoadDirection.WEST, RoadDirection.SOUTH.next());
         assertEquals(RoadDirection.NORTH, RoadDirection.WEST.next());
     }
 
     @Test
     public void prevTest() {
-        // Only edge value
-
         // given, when, then
         assertEquals(RoadDirection.WEST, RoadDirection.NORTH.prev());
+        assertEquals(RoadDirection.SOUTH, RoadDirection.WEST.prev());
+        assertEquals(RoadDirection.EAST, RoadDirection.SOUTH.prev());
+        assertEquals(RoadDirection.NORTH, RoadDirection.EAST.prev());
     }
 }
