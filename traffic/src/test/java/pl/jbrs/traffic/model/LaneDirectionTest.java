@@ -2,6 +2,8 @@ package pl.jbrs.traffic.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LaneDirectionTest {
@@ -54,5 +56,20 @@ public class LaneDirectionTest {
 
         // given, when, then
         assertEquals("right", LaneDirection.RIGHT.toString());
+    }
+
+    @Test
+    public void fromMoveDirectionTest() {
+        // given
+        List<LaneDirection> expectedRight = List.of(LaneDirection.RIGHT, LaneDirection.STRAIGHT_RIGHT);
+        List<LaneDirection> expectedStraight = List.of(LaneDirection.STRAIGHT_RIGHT, LaneDirection.STRAIGHT, LaneDirection.STRAIGHT_LEFT);
+        List<LaneDirection> expectedLeft = List.of(LaneDirection.STRAIGHT_LEFT, LaneDirection.LEFT, LaneDirection.UTURN_LEFT);
+        List<LaneDirection> expectedUturn = List.of(LaneDirection.UTURN, LaneDirection.UTURN_LEFT);
+
+        // when, then
+        assertEquals(expectedRight, LaneDirection.fromMoveDirection(MoveDirection.RIGHT));
+        assertEquals(expectedStraight, LaneDirection.fromMoveDirection(MoveDirection.STRAIGHT));
+        assertEquals(expectedLeft, LaneDirection.fromMoveDirection(MoveDirection.LEFT));
+        assertEquals(expectedUturn, LaneDirection.fromMoveDirection(MoveDirection.UTURN));
     }
 }
