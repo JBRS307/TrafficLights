@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Application app;
         try {
-            app = Application.getInstance();
+            app = Application.fromArgs(args);
             app.runSimulation();
             app.saveResultToJSON();
         } catch (MissingInputFileException e) {

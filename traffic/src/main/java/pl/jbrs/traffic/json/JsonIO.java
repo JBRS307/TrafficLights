@@ -42,10 +42,6 @@ public class JsonIO {
         this.configPath = configPath;
     }
 
-    public JsonIO() {
-        this(DefaultPaths.INPUT, DefaultPaths.OUTPUT, DefaultPaths.CONFIG);
-    }
-
     public String readInput() throws IOException {
         return Files.readString(Path.of(inputPath));
     }

@@ -23,19 +23,21 @@ import java.util.Map;
 import java.util.Queue;
 
 public class Application {
-    private static Application app;
-    public static Application getInstance() throws IOException, MissingInputFileException {
-        if (app == null) {
-            app = new Application();
-        }
-        return app;
+    public static Application fromArgs(String[] args) throws IOException {
+        return switch (args.length) {
+            case 0 -> new Application(DefaultPaths.INPUT, DefaultPaths.OUTPUT, DefaultPaths.CONFIG);
+            case 1 -> new Application(args[0], DefaultPaths.OUTPUT, DefaultPaths.CONFIG);
+            case 2 -> new Application(args[0], args[1], DefaultPaths.CONFIG);
+            default -> new Application(args[0], args[1], args[2]);
+        };
     }
 
-    private final JsonIO jsonIo = new JsonIO();
+    private final JsonIO jsonIo;
     private final Simulation simulation;
     private final Queue<Command> commandQueue;
 
-    private Application() throws IOException {
+    private Application(String inputPath, String outputPath, String configPath) throws IOException {
+        jsonIo = new JsonIO(inputPath, outputPath, configPath);
         ModelConfiguration modelConfiguration;
         Map<RoadDirection, RoadConfiguration> roadConfiguration;
         SimulationConfiguration simulationConfiguration;
