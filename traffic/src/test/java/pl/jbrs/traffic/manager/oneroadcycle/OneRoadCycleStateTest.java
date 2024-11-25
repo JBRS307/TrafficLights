@@ -7,25 +7,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OneRoadCycleStateTest {
     @Test
     public void nextTest() {
-        // Not all options will be tested, one in the middle and the edge one to check
-        // if jump from end to beginning works
-
         // given, when, then
+        assertEquals(OneRoadCycleState.NORTH_YELLOW, OneRoadCycleState.NORTH.next());
+        assertEquals(OneRoadCycleState.EAST, OneRoadCycleState.NORTH_YELLOW.next());
+        assertEquals(OneRoadCycleState.EAST_YELLOW, OneRoadCycleState.EAST.next());
         assertEquals(OneRoadCycleState.SOUTH, OneRoadCycleState.EAST_YELLOW.next());
-
-        // given, when, then
+        assertEquals(OneRoadCycleState.SOUTH_YELLOW, OneRoadCycleState.SOUTH.next());
+        assertEquals(OneRoadCycleState.WEST, OneRoadCycleState.SOUTH_YELLOW.next());
+        assertEquals(OneRoadCycleState.WEST_YELLOW, OneRoadCycleState.WEST.next());
         assertEquals(OneRoadCycleState.NORTH, OneRoadCycleState.WEST_YELLOW.next());
     }
 
     @Test
     public void previousTest() {
-        // Same situation as with next test
-
-        // given, when, then
-        assertEquals(OneRoadCycleState.SOUTH, OneRoadCycleState.SOUTH_YELLOW.prev());
-
         // given, when, then
         assertEquals(OneRoadCycleState.WEST_YELLOW, OneRoadCycleState.NORTH.prev());
+        assertEquals(OneRoadCycleState.WEST, OneRoadCycleState.WEST_YELLOW.prev());
+        assertEquals(OneRoadCycleState.SOUTH_YELLOW, OneRoadCycleState.WEST.prev());
+        assertEquals(OneRoadCycleState.SOUTH, OneRoadCycleState.SOUTH_YELLOW.prev());
+        assertEquals(OneRoadCycleState.EAST_YELLOW, OneRoadCycleState.SOUTH.prev());
+        assertEquals(OneRoadCycleState.EAST, OneRoadCycleState.EAST_YELLOW.prev());
+        assertEquals(OneRoadCycleState.NORTH_YELLOW, OneRoadCycleState.EAST.prev());
+        assertEquals(OneRoadCycleState.NORTH, OneRoadCycleState.NORTH_YELLOW.prev());
     }
 
     @Test
